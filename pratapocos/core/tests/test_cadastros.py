@@ -15,7 +15,7 @@ def test_criar_cadastro_com_login(client, db):
     assert resp.status_code == 200
 
 
-def test_criar_cadastro_com_login(client, db):
+def test_criar_cadastro_com_login_2(client, db):
     fixtures.user_jon()
     Cadastro.objects.create(description="walk the dog")
 

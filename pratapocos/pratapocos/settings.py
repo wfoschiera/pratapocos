@@ -12,10 +12,10 @@ https://docs.djangoproject.com/en/2.0/ref/settings/
 
 import os
 from pathlib import Path
-from django.core.management.utils import get_random_secret_key
 
-from decouple import config
 import dj_database_url
+from decouple import config
+from django.core.management.utils import get_random_secret_key
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -52,7 +52,9 @@ DJANGO_APPS = [
 ]
 
 THIRD_PARTY_APPS = [
-    "django_extensions","whitenoise.runserver_nostatic",]
+    "django_extensions",
+    "whitenoise.runserver_nostatic",
+]
 
 LOCAL_APPS = [
     "pratapocos.base",
@@ -63,7 +65,9 @@ LOCAL_APPS = [
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
 
 MIDDLEWARE = [
-    "django.middleware.security.SecurityMiddleware","whitenoise.middleware.WhiteNoiseMiddleware","django.contrib.sessions.middleware.SessionMiddleware",
+    "django.middleware.security.SecurityMiddleware",
+    "whitenoise.middleware.WhiteNoiseMiddleware",
+    "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
@@ -89,9 +93,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = (
-    "pratapocos.pratapocos.wsgi.application"
-)
+WSGI_APPLICATION = "pratapocos.pratapocos.wsgi.application"
 
 AUTH_USER_MODEL = "accounts.User"
 

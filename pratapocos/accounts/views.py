@@ -1,12 +1,12 @@
 # coding: utf-8
-from django.http import JsonResponse
 from django.contrib import auth
-
-from ninja import Router, Form, Schema
+from django.http import JsonResponse
+from ninja import Form, Router, Schema
 
 from ..core.service import log_svc
 
 router = Router()
+
 
 class PermissionSchema(Schema):
     ADMIN: bool
@@ -20,8 +20,8 @@ class UserSchema(Schema):
     first_name: str
     last_name: str
     email: str
-    avatar: str = None
-    bio: str = None
+    avatar: str | None = None
+    bio: str | None = None
     permissions: PermissionSchema
 
 
@@ -30,10 +30,8 @@ class LoggedUserSchema(Schema):
     authenticated: bool
 
 
-
 @router.post("/login", response=UserSchema)
 def login(request, username: str = Form(...), password: str = Form(...)):
-
     username = request.POST["username"]
     password = request.POST["password"]
     user = auth.authenticate(username=username, password=password)
