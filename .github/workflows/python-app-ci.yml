@@ -2,9 +2,9 @@ name: pratapocos CI
 
 on:
   push:
-    branches: [main, master]
+    branches: [main]
   pull_request:
-    branches: [main, master]
+    branches: [main]
 
 jobs:
   build:
@@ -32,38 +32,37 @@ jobs:
       - uses: Gr1N/setup-poetry@v8
       - uses: actions/cache@v2
         with:
-          path: ~/.cache/pypoetry/virtualenvs
+          path: ~/.cache/pypoetry
           key: ${{ runner.os }}-poetry-${{ hashFiles('poetry.lock') }}
       - run: poetry --version
 
       - name: Install dependencies
         run: |
           poetry install
-          source `poetry env info --path`/bin/activate
 
       - name: Run Python Linter
         run: |
-          ruff .
+          poetry run ruff .
 
       - name: Run Formatter
         run: |
-          black --check --diff .
-          isort --check --diff .
+          poetry run black --check --diff .
+          poetry run isort --check --diff .
 
       - name: Run Python Mypy
         run: |
-          mypy .
+          poetry run mypy .
 
       - name: Run Python Bandit
         run:
-          bandit --exclude ./tests,./.venv,./dist --recursive .
+          poetry run bandit --exclude /tests/,./.venv,./dist --recursive .
 
       - name: Rodar migrations
         env:
           DATABASE_URL: postgres://postgres:db_test_pwd_ci@localhost:5432/db_test
-        run: ./manage.py migrate --noinput
+        run: poetry run ./manage.py migrate --noinput
 
       - name: Tests
         env:
           DATABASE_URL: postgres://postgres:db_test_pwd_ci@localhost:5432/db_test
-        run: pytest --cache-clear
+        run: poetry run pytest --cache-clear
