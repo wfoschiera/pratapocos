@@ -62,8 +62,8 @@ plugins = ["pydantic.mypy"]
 # disallow_untyped_defs = true  # pro futuro
 # strict = true  # pro futuro
 
-[tool.bandit.assert_used]
-skips = ['*_test.py', '*/test_*.py', '*/conftest.*']
+[tool.bandit]
+exclude = ["*_test.py", "*.venv", "*/test_*.py", "*/conftest.py"]
 recursive = true
 
 [tool.pydantic-mypy]
