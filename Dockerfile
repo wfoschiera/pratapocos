@@ -29,7 +29,7 @@ COPY requirements-dev.txt ./
 
 RUN pip install -r requirements-dev.txt
 
-ENV PYTHONUNBUFFERED=1 
+ENV PYTHONUNBUFFERED=1
 ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONIOENCODING=UTF-8
 ENV SHELL=/bin/bash LANG=en_US.UTF-8
@@ -40,5 +40,3 @@ EXPOSE 8000
 
 
 CMD ["gunicorn", "--bind", ":8000", "--workers", "2", "pratapocos.pratapocos.wsgi"]
-
-

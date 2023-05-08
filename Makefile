@@ -31,7 +31,7 @@ show:                      ## Show the current environment
 	@echo ">>> Running using '$(ENV_PREFIX)'"
 	@$(ENV_PREFIX)python -V
 	@$(ENV_PREFIX)python -m site
-	
+
 
 
 #run: $(eval SHELL:=/bin/bash)
@@ -85,4 +85,3 @@ clean:                     ## Clean unused files
 	@find ./ -name '__pycache__' -exec rm -rf {} \; 2> /dev/null
 	@rm -rf .cache
 	@rm -rf .pytest_cache
-
