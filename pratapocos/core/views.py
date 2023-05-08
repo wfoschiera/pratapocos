@@ -20,14 +20,14 @@ class ListTasksSchema(Schema):
     tasks: List[TaskSchema]
 
 
-@router.post("/tasks/add", response=TaskSchema)
+@router.post("/cadastros/add", response=TaskSchema)
 def add_cadastro(request, task: TaskSchema):
     new_cadastro = cadastros_svc.add_cadastro(task.description)
 
     return JsonResponse(new_cadastro)
 
 
-@router.get("/tasks/list", response=ListTasksSchema)
+@router.get("/cadastros/list", response=ListTasksSchema)
 def list_cadastros(request):
     cadastros = cadastros_svc.list_cadastros()
     return JsonResponse({"cadastros": cadastros})
