@@ -40,7 +40,7 @@ def login(request, username: str = Form(...), password: str = Form(...)):
         if user.is_active:
             auth.login(request, user)
             log_svc.log_login(request.user)
-            user_dict = _user2dict(user)
+            user_dict = user.to_dict_json()
     return JsonResponse(user_dict, safe=False)
 
 
@@ -58,28 +58,10 @@ def logout(request):
 def whoami(request):
     i_am = (
         {
-            "user": _user2dict(request.user),
+            "user": (request.user.to_dict_json()),
             "authenticated": True,
         }
         if request.user.is_authenticated
         else {"authenticated": False}
     )
     return JsonResponse(i_am)
-
-
-def _user2dict(user):
-    d = {
-        "id": user.id,
-        "name": user.get_full_name(),
-        "username": user.username,
-        "first_name": user.first_name,
-        "last_name": user.last_name,
-        "email": user.email,
-        "avatar": user.avatar,
-        "bio": user.bio,
-        "permissions": {
-            "ADMIN": user.is_superuser,
-            "STAFF": user.is_staff,
-        },
-    }
-    return d

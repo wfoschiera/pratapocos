@@ -62,8 +62,8 @@ plugins = ["pydantic.mypy"]
 # disallow_untyped_defs = true  # pro futuro
 # strict = true  # pro futuro
 
-[tool.bandit.assert_used]
-skips = ['*_test.py', '*/test_*.py']
+[tool.bandit]
+exclude = ["*_test.py", "*.venv", "*/test_*.py", "*/conftest.py"]
 recursive = true
 
 [tool.pydantic-mypy]
@@ -76,11 +76,13 @@ warn_untyped_fields = true
 slow="mark slow tests."
 
 [tool.pytest.ini_options]
-python_files = ["test_*.py",]
+python_files = ["test_*.py", "*_test.py", "testing/python/*.py"]
 filterwarnings = [
     "error",
     'ignore::DeprecationWarning',
 ]
+DJANGO_SETTINGS_MODULE = "pratapocos.pratapocos.settings"
+addopts = "--reuse-db --fail-on-template-vars"  # --migrateci
 
 [tool.coverage.run]
 omit= ["tests/**"]
