@@ -7,5 +7,6 @@ htmlcov/
 .idea
 /pratapocos.log
 /static
+static
 
 /apimock/node_modules
